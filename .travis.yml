@@ -11,7 +11,7 @@ script:
   - ls -al target > target/index.html
 deploy:
   provider: netlify
-  site: 
+  site: https://binary921.netlify.com/
   auth: $NETLIFY_AUTH
   edge: true # opt in to dpl 
   dir: target
