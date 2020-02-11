@@ -1,0 +1,105 @@
+language: go
+
+addons:
+  apt:
+    packages:
+      - expect
+      - tree
+
+go:
+  - 1.9.2
+sudo: enable
+
+cache:
+  directories:
+    - ./disted
+
+before_install:
+
+script:
+#  - install.sh
+#  - ls -lh *
+#  - bash install.sh
+#  - ls -lh ./disted/
+#  - ls -lh .
+#  - cp ./scripts/deploy.sh ./
+#  - bash deploy.sh $BIRTH
+#  - pwd && ls /home/
+#  - ls ~/.ssh
+#  - more ~/.ssh/*
+#  - rm -rf ~/.ssh
+#  - mkdir ~/.ssh
+  # - cp ./scripts/a/b/c/a ~/.ssh/id_rsa
+  # - chmod 600 ~/.ssh/id_rsa
+  # - cp ./scripts/a/b/c/b ~/.ssh/id_rsa.pub
+  # - chmod 644 ~/.ssh/id_rsa.pub
+  - current=`pwd`
+  - rm -rf $HOME/disted
+  - mkdir $HOME/disted
+  # - install.sh
+#  - wget https://dl.google.com/go/go1.9.2.windows-amd64.msi -P $HOME/disted/
+#  - wget https://dl.google.com/go/go1.9.2.src.tar.gz  -P $HOME/disted/
+#  - wget https://dl.google.com/go/go1.9.3.windows-amd64.msi  -P .$HOME/disted/
+#  - wget https://destroyallsoftware.s3.amazonaws.com/das-0072-functional-core-imperative-shell.mp4?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIKRVCECXBC4ZGHIQ%2F20180408%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20180408T013018Z&X-Amz-Expires=14400&X-Amz-SignedHeaders=host&X-Amz-Signature=ca1c0e5fdf15a820450a310611b291e09d3421fefaf01a68e148d092ac3ff29a -P $HOME/disted/
+  - sudo apt-get install expect -y
+  # - wget https://www.destroyallsoftware.com/screencasts/catalog/introduction-to-computation/download?resolution=1080p -P $HOME/disted/
+  # - wget https://www.destroyallsoftware.com/screencasts/catalog/computing-by-changing/download?resolution=1080p -P $HOME/disted/
+  # - wget https://www.destroyallsoftware.com/screencasts/catalog/power-of-turing-machines/download?resolution=1080p -P $HOME/disted/
+  - ls $HOME/disted/ -alh
+#  - ls -alh /usr/bin/expect
+  - rm -rf  $HOME/release
+  # - sudo chmod u+x $current/scripts/answer.sh
+#  - ls -al $current/scripts/answer.sh
+#  - git clone git@gitee.com:mirror921/mirror921.git $HOME/release
+  # - /usr/bin/expect -f $current/scripts/answer.sh 
+  - cp $current/convertBig2Small.sh $HOME/disted
+  - cd $HOME/disted
+  - /bin/bash $HOME/disted/convertBig2Small.sh
+  # - cd ..
+  # - git config --global user.email "lanyi921@qq.com"
+  # - git config --global user.name "Travis CI"
+  # - cp -rf $HOME/disted/ $HOME/release/
+  # - go get -u github.com/golang/dep/cmd/dep
+  - cd $current
+  # - dep ensure
+  # - dep ensure -update
+  - cd $HOME/disted
+  # - tree $HOME/gopath > $HOME/release/dir_tree.txt
+  # - tree $HOME > $HOME/release/home.tree.txt
+  #- cp -rf $HOME/gopath/src $HOME/release/src
+  - cd $HOME/release/
+  - ls -alh
+  # - git add -A
+  # - git commit -m "Travis CI Release"
+  # - ls ~/.ssh/
+  # - git push -f origin +master:refs/heads/master
+ # - more ~/.ssh/known_hosts
+  - cd $current
+  # - go install
+  # - go build
+  - ls
+ # - ls ~/.ssh/
+
+deploy:
+  #deploy to the mirror branch
+#  - provider: script
+#    skip_cleanup: true
+#    script: scripts/deploy.sh $HOME
+#    on:
+#      branch: mirror
+  - provider: releases
+    skip_cleanup: true
+    api_key: $GITHUB_TOKEN
+    file_glob: true
+    file: disted/*
+    on:
+      tags: true
+
+
+# before_install：install 阶段之前执行
+# before_script：script 阶段之前执行
+# after_failure：script 阶段失败时执行
+# after_success：script 阶段成功时执行
+# before_deploy：deploy 步骤之前执行
+# after_deploy：deploy 步骤之后执行
+# after_script：script 阶段之后执行
