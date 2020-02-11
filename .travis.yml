@@ -16,3 +16,7 @@ deploy:
   auth: $NETLIFY_AUTH
   edge: true # opt in to dpl 
   dir: target
+after_deploy：
+  - ls -al
+  - pwd
+# deploy
