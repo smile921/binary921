@@ -2,7 +2,7 @@ language: rust
 rust: stable
 script:
   # - cargo build --verbose --all
-  - ls -alh target
+  # - ls -alh target
   # - rm -rf target/.*
   # - rm -rf target/debug
   # - cargo test --verbose --all
