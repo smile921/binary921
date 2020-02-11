@@ -9,7 +9,7 @@ script:
   - wget https://github.com/rustwasm/wasm-pack/releases/download/v0.9.1/wasm-pack-init.exe -P target/
   - ls -alh
   - ls -al target > target/index.html
-  - rm -y target/wasm-pack-init.exe
+  - rm  target/wasm-pack-init.exe
   - ls -alh target
 deploy:
   provider: netlify
