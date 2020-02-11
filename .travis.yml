@@ -6,9 +6,9 @@ script:
   # - rm -rf target/.*
   # - rm -rf target/debug
   # - cargo test --verbose --all
-  - wget https://github.com/rustwasm/wasm-pack/releases/download/v0.9.1/wasm-pack-init.exe -P target/
+  # - wget https://github.com/rustwasm/wasm-pack/releases/download/v0.9.1/wasm-pack-init.exe -P target/
   - ls -alh
-  - ls -al target > target/index.html
+  - ls -al ./  > target/index.html
   - ls -alh target
 deploy:
   provider: netlify
