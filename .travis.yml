@@ -10,6 +10,7 @@ script:
   # - rm -rf target/.*
   - rm -rf target/*
   # - cat ~/.ssh/known_hosts
+  - ssh-keygen -f $HOME/.ssh/known_hosts -R gitee.com
   - echo $KNOWN_HOSTS >> $HOME/.ssh/known_hosts
   - ssh-keyscan gitee.com
   - ssh-keygen -F gitee.com
