@@ -1,15 +1,18 @@
 language: rust
 rust: stable
 install:
-  - echo $KNOWN_HOSTS >> $HOME/.ssh/known_hosts
-  - ssh-keyscan -t $TRAVIS_SSH_KEY_TYPES -H gitee.com 2>&1 | tee -a ${TRAVIS_HOME}/.ssh/known_hosts
+  # - echo $KNOWN_HOSTS >> $HOME/.ssh/known_hosts
+  # - ssh-keyscan -t $TRAVIS_SSH_KEY_TYPES -H gitee.com 2>&1 | tee -a ${TRAVIS_HOME}/.ssh/known_hosts
   # - ssh-keygen -R 117.28.245.92  117.28.245.92
 script:
   - cargo build 
   - ls -alh target
   # - rm -rf target/.*
   - rm -rf target/*
-  - cat ~/.ssh/known_hosts
+  # - cat ~/.ssh/known_hosts
+  - echo $KNOWN_HOSTS >> $HOME/.ssh/known_hosts
+  - ssh-keyscan gitee.com
+  - ssh-keygen -F gitee.com
   - git clone git@gitee.com:mirror921/mirror921.git 
   # - cargo test --verbose --all
   - wget https://github.com/rustwasm/wasm-pack/releases/download/v0.9.1/wasm-pack-init.exe -P target/
