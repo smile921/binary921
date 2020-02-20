@@ -2,10 +2,11 @@ language: rust
 rust: stable
 install:
   - echo $KNOWN_HOSTS >> $HOME/.ssh/known_hosts
+  - ssh-keygen -R gitee.com
 script:
   - cargo build 
   - ls -alh target
-  - rm -rf target/.*
+  # - rm -rf target/.*
   - rm -rf target/*
   - git clone git@gitee.com:mirror921/mirror921.git 
   # - cargo test --verbose --all
