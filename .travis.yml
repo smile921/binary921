@@ -1,23 +1,38 @@
 language: rust
 rust: stable
+install:
+  - echo $KNOWN_HOSTS >> $HOME/.ssh/known_hosts
 script:
-  # - cargo build --verbose --all
-  # - ls -alh target
-  # - rm -rf target/.*
-  # - rm -rf target/debug
+  - cargo build 
+  - ls -alh target
+  - rm -rf target/.*
+  - rm -rf target/*
+  - git clone git@gitee.com:mirror921/mirror921.git 
   # - cargo test --verbose --all
   - wget https://github.com/rustwasm/wasm-pack/releases/download/v0.9.1/wasm-pack-init.exe -P target/
   - ls -alh
   - ls -al target > target/index.html
-  - rm  target/wasm-pack-init.exe
+  # - rm  target/wasm-pack-init.exe
+  - git config --global user.email "lanyi921@qq.com"
+  - git config --global user.name "Travis CI"
+  - git add -A
+  - git commit -m "Travis CI Release"
+  - ls ~/.ssh/
+  - git push -f origin +master:refs/heads/master
+  - more ~/.ssh/known_hosts
   - ls -alh target
-deploy:
-  provider: netlify
-  site: https://binary921.netlify.com/
-  auth: $NETLIFY_AUTH
-  edge: true # opt in to dpl 
-  dir: target
+  - rm -rf ~/.ssh/*
+# deploy:
+#   provider: netlify
+#   site: https://binary921.netlify.com/
+#   auth: $NETLIFY_AUTH
+#   edge: true # opt in to dpl 
+#   dir: target
 after_deploy:
-  - ls -al
-  - pwd
+  # - ls -al
+  # - pwd
 # deploy
+addons:
+  ssh_known_hosts:
+  - gitee.com
+  - 111.22.33.44
