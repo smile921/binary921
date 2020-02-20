@@ -2,7 +2,7 @@ language: rust
 rust: stable
 install:
   - echo $KNOWN_HOSTS >> $HOME/.ssh/known_hosts
-  - ssh-keygen -R 117.28.245.92
+  # - ssh-keygen -R 117.28.245.92
 script:
   - cargo build 
   - ls -alh target
