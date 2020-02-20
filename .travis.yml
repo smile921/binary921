@@ -40,5 +40,5 @@ after_deploy:
 # deploy
 addons:
   ssh_known_hosts:
-  - gitee.com
+  # - gitee.com
   # - 111.22.33.44
